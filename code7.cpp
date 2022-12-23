@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-string s,s1,s2,str,aimstr,aimstr2,aimstr3,aimstr4;
+string s,s1,s2,str,aimstr,aimstr2,aimstr3;
 int n=s.size();
 
 
@@ -80,11 +80,24 @@ void ascii(){
     }
 }
 
-void reverse(){
-    for(int i=aimstr3.size()-1;i>=0;i--){
-        aimstr4+=aimstr3[i];
-    }
+int mystrlen(char *str){
+    if(*str=='\0')
+        return 0;
+    else
+        return mystrlen(str+1)+1;
+}
 
+void reverse(char *string){  //递归反转字符串需要结合mystrlen()函数
+    int len=mystrlen(string);
+    if(len<=1)
+        return;
+    else{
+        char temp=string[0];
+        string[0]=string[len-1];
+        string[len-1]='\0';
+        reverse(string+1);
+        string[len-1]=temp;
+    }
 }
 
 int main(){
@@ -116,7 +129,7 @@ int main(){
     mydelete();
     mytransform();
     ascii();
-    reverse();
-    cout<<aimstr4;
+    reverse(&aimstr3[0]);
+    cout<<aimstr3;
     return 0;
 }

@@ -1,8 +1,9 @@
 #include<iostream>
 using namespace std;
 
-string s,s1,s2,str,aimstr;
+string s,s1,s2,str,aimstr,aimstr2,aimstr3,aimstr4;
 int n=s.size();
+
 
 int check(string str,int x){  //判断从s[x]开始是否与对应字符串相同
     for(int i=0;i<str.size();i++){
@@ -43,7 +44,48 @@ string find(int head,int tail){  //找到aimstr
     }
 }
 
+void mytransform(){
+    for(int i=0;i<aimstr2.size();i++){
+        if(aimstr2[i]>='a'&&aimstr2[i]<='z'){
+            aimstr2[i]-=32;
+        }
+        else{
+            aimstr2[i]+=32;
+        }
+    }
+}
 
+void mydelete(){
+    for(int i=0;i<aimstr.size();i++){
+        if(aimstr[i]>='a'&&aimstr[i]<='z'||aimstr[i]>='A'&&aimstr[i]<='Z'){
+            aimstr2+=aimstr[i];
+        }
+    }
+}
+
+void ascii(){
+    int a[101];
+    string b[101];
+    for(int i=0;i<aimstr2.size();i++){
+        a[i]=aimstr2[i];
+        if(a[i]<100&&i!=0||i==aimstr2.size()-1&&a[i]%10==0){
+           b[i]="0"+to_string(aimstr2[i]);
+        }
+        else{
+            b[i]=to_string(aimstr2[i]);
+        }
+    }
+    for(int i=0;i<aimstr2.size();i++){
+        aimstr3+=b[i];
+    }
+}
+
+void reverse(){
+    for(int i=aimstr3.size()-1;i>=0;i--){
+        aimstr4+=aimstr3[i];
+    }
+
+}
 
 int main(){
     cin>>s1>>s2>>s;
@@ -71,6 +113,10 @@ int main(){
         tail=place2();
         find(head,tail);
     }
-    cout<<aimstr;
+    mydelete();
+    mytransform();
+    ascii();
+    reverse();
+    cout<<aimstr4;
     return 0;
 }

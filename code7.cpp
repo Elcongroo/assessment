@@ -4,7 +4,7 @@ using namespace std;
 string s,s1,s2,str,aimstr;
 int n=s.size();
 
-int check(string str,int x){
+int check(string str,int x){  //判断从s[x]开始是否与对应字符串相同
     for(int i=0;i<str.size();i++){
         if(s[i+x]!=str[i]){
             return 0;
@@ -13,7 +13,7 @@ int check(string str,int x){
     return 1;
 }
 
-int place1(){
+int place1(){     //head的头字母位置
     for(int i=0;i<s.size();i++){
         if(check(s1,i)){
             return i;
@@ -21,7 +21,7 @@ int place1(){
     }
     return 105;
 }
-int place2(){
+int place2(){   //tail的头字母位置
     for(int i=0;i<s.size();i++){
         if(check(s2,i)){
             return i;
@@ -30,7 +30,7 @@ int place2(){
     return 105;
 }
 
-string find(int head,int tail){
+string find(int head,int tail){  //找到aimstr
     if(head<tail){
         for(int i=head+1;i<tail;i++){
             aimstr+=s[i];
@@ -63,12 +63,12 @@ int main(){
     int head,tail;
     if(place1()>place2()){
         head=place1();
-        tail=place2()+s2.size();
+        tail=place2()+s2.size()-1;
         find(head,tail);
     }
     else{
-        head=place2();
-        tail=place1()+s1.size();
+        head=place1()+s1.size()-1;
+        tail=place2();
         find(head,tail);
     }
     cout<<aimstr;

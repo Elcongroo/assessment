@@ -31,7 +31,7 @@ int place2(){   //tail的头字母位置
     return 105;
 }
 
-string find(int head,int tail){  //找到aimstr
+void find(int head,int tail){  //找到aimstr
     if(head<tail){
         for(int i=head+1;i<tail;i++){
             aimstr+=s[i];
@@ -42,6 +42,16 @@ string find(int head,int tail){  //找到aimstr
             aimstr+=s[i];
         }
     }
+    return;
+}
+
+void mydelete(){
+    for(int i=0;i<aimstr.size();i++){
+        if(aimstr[i]>='a'&&aimstr[i]<='z'||aimstr[i]>='A'&&aimstr[i]<='Z'){
+            aimstr2+=aimstr[i];
+        }
+    }
+    return;
 }
 
 void mytransform(){
@@ -53,14 +63,7 @@ void mytransform(){
             aimstr2[i]+=32;
         }
     }
-}
-
-void mydelete(){
-    for(int i=0;i<aimstr.size();i++){
-        if(aimstr[i]>='a'&&aimstr[i]<='z'||aimstr[i]>='A'&&aimstr[i]<='Z'){
-            aimstr2+=aimstr[i];
-        }
-    }
+    return;
 }
 
 void ascii(){
@@ -68,7 +71,7 @@ void ascii(){
     string b[101];
     for(int i=0;i<aimstr2.size();i++){
         a[i]=aimstr2[i];
-        if(a[i]<100&&i!=0||i==aimstr2.size()-1&&a[i]%10==0){
+        if(a[i]<100&&i!=0){  //避免末尾出0
            b[i]="0"+to_string(aimstr2[i]);
         }
         else{
@@ -78,6 +81,7 @@ void ascii(){
     for(int i=0;i<aimstr2.size();i++){
         aimstr3+=b[i];
     }
+    return;
 }
 
 int mystrlen(char *str){
@@ -98,6 +102,7 @@ void reverse(char *string){  //递归反转字符串需要结合mystrlen()函数
         reverse(string+1);
         string[len-1]=temp;
     }
+    return;
 }
 
 int main(){
@@ -127,6 +132,10 @@ int main(){
         find(head,tail);
     }
     mydelete();
+    if(aimstr2.size()==0){  //中间字符串为空
+        cout<<"NONE";
+        return 0;
+    }
     mytransform();
     ascii();
     reverse(&aimstr3[0]);

@@ -3,9 +3,9 @@ using namespace std;
 
 int arr[10][10],q[1001];
 int m,n;
-int vis[10][10]={0};//åˆ¤æ–­è¯¥æ•°å­—æœ‰æ— è¢«è®¿é—®è¿‡ï¼Œå³åˆ¤æ–­æ˜¯å¦è½¬å‘
+int vis[10][10]={0};//ÅĞ¶Ï¸ÃÊı×ÖÓĞÎŞ±»·ÃÎÊ¹ı£¬¼´ÅĞ¶ÏÊÇ·ñ×ªÏò
 
-void create(){  //åˆ›å»ºä¸€ä¸ªéšæœºm*nçŸ©é˜µ
+void create(){  //´´½¨Ò»¸öËæ»úm*n¾ØÕó
     int cnt=0;
     srand((int)time(NULL));
     m=rand()%6+2;
@@ -27,7 +27,7 @@ void myprint(){
     }
 }
 
-char check(int *i,int *j,int x,int y){  //æ£€æµ‹å½“å‰æ˜¯å¦åº”è¯¥è½¬å‘
+char check(int *i,int *j,int x,int y){  //¼ì²âµ±Ç°ÊÇ·ñÓ¦¸Ã×ªÏò
     int ti=*i,tj=*j;
     if(tj>=n&&x==1||(vis[ti][tj]&&x==1)){
         *i-=y;
@@ -55,17 +55,17 @@ char check(int *i,int *j,int x,int y){  //æ£€æµ‹å½“å‰æ˜¯å¦åº”è¯¥è½¬å‘
 }
 
 void initvis(){
-    for(int i=0;i<m;i++){
-        for(int j=0;j<n;j++){
+    for(int i=0;i<=m;i++){
+        for(int j=0;j<=n;j++){
             vis[i][j]=0;
         }
     }
     return;
 }
-void move(){   //å…ˆæŒ‰ç…§é¡ºæ—¶é’ˆé¡ºåºæŠŠäºŒç»´æ•°ç»„è¯»å…¥åˆ°ä¸€ç»´æ•°ç»„qä¸­ï¼Œè¿›è¡Œç§»é¡¹ï¼Œç„¶åå†é‡æ–°æŒ‰ç…§é¡ºåºå¯¹arrèµ‹å€¼
+void move(){   //ÏÈ°´ÕÕË³Ê±ÕëË³Ğò°Ñ¶şÎ¬Êı×é¶ÁÈëµ½Ò»Î¬Êı×éqÖĞ£¬½øĞĞÒÆÏî£¬È»ºóÔÙÖØĞÂ°´ÕÕË³Ğò¶Ôarr¸³Öµ
     int order=0,i=0,j=0,x=1,y=0;
     while(order<m*n){
-       // cout<<"ä½ç½®"<<i<<" "<<j<<endl;
+       // cout<<"Î»ÖÃ"<<i<<" "<<j<<endl;
         q[order++]=arr[i][j];
         vis[i][j]=1;
         i+=y,j+=x;
@@ -88,17 +88,24 @@ void move(){   //å…ˆæŒ‰ç…§é¡ºæ—¶é’ˆé¡ºåºæŠŠäºŒç»´æ•°ç»„è¯»å…¥åˆ°ä¸€ç»´æ•°ç»„qä¸
         i+=y,j+=x;
     }
     int t;
-    for(i=m*n;i>=0;i--)  //ç§»é¡¹
+   //  cout<<"test2: ";
+   //  for(i=0;i<m*n;i++){
+   //     cout<<q[i]<<" ";
+   // }
+   // cout<<endl;
+    for(i=m*n;i>0;i--)  //ÒÆÏî
         q[i]=q[i-1];
     q[0]=q[m*n];
-//    for(i=0;i<m*n;i++){
-//        cout<<q[i]<<" ";
-//    }
+   //  cout<<"test2: ";
+   // for(i=0;i<m*n;i++){
+   //     cout<<q[i]<<" ";
+   // }
     order=0;
     initvis();
     i=0,j=0;
+    x=1,y=0;//³ö´íµÄµØ·½¡£
     while(order<m*n){
-       // cout<<"ä½ç½®"<<i<<" "<<j<<endl;
+       // cout<<"Î»ÖÃ"<<i<<" "<<j<<endl;
         arr[i][j]=q[order++];
         vis[i][j]=1;
         i+=y,j+=x;
@@ -126,11 +133,12 @@ void move(){   //å…ˆæŒ‰ç…§é¡ºæ—¶é’ˆé¡ºåºæŠŠäºŒç»´æ•°ç»„è¯»å…¥åˆ°ä¸€ç»´æ•°ç»„qä¸
 int main(){
     create();
     cout<<m<<" "<<n<<endl;
-    cout<<"åŸçŸ©é˜µä¸ºï¼š"<<endl;
+    cout<<"first:"<<endl;
     myprint();
     cout<<endl;
-    cout<<"ç°çŸ©é˜µä¸ºï¼š"<<endl;
+    cout<<"after:"<<endl;
     move();
     myprint();
     return 0;
 }
+
